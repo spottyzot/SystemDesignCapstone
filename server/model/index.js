@@ -20,6 +20,9 @@ module.exports = {
           })
       })
   },
+//initial query: 140ms afterwards: <1s querytime
+
+
 
   readInfo: (productID) => {
     return pool.connect()
@@ -37,11 +40,13 @@ module.exports = {
         })
       })
   },
+//initial query time: 35ms; after: <1ms querytime
+
 
   readStyles: (productID) => {
     return pool.connect()
     .then((client) => {
-      const queryStr = "select products.id, array(select json_build_object('style_id', style_id, 'name', name, 'original_price', original_price, 'sale_price', sale_price, 'default?', default_style, 'photos', array(select json_build_object('thumbnail_url', thumbnail_url, 'url', url) from photos where photos.styleId = styles.style_id), 'skus', (select json_object_agg(skus.sku_id, json_build_object('quantity', quantity, 'size', size)) from skus where skus.styleId = styles.style_id)) from styles where styles.productId = products.id) as results from products where products.id = $1";
+      const queryStr = "select products.id, array(select json_build_object('style_id', style_id, 'name', name, 'original_price', original_price, 'sale_price', sale_price, 'default?', default_style, 'photos', array(select json_build_object('thumbnail_url', thumbnail_url, 'url', url) from photos where photos.style_id = styles.style_id), 'skus', (select json_object_agg(skus.sku_id, json_build_object('quantity', quantity, 'size', size)) from skus where skus.style_id = styles.style_id)) from styles where styles.product_id = products.id) as results from products where products.id = $1";
       return client.query(queryStr, [productID])
       .then((info) => {
         client.release();
@@ -53,6 +58,7 @@ module.exports = {
       })
     })
   },
+  //initial query: 50000ms after: 3800-4000ms
 
   readRelated: (productID) => {
     return pool.connect()
@@ -70,3 +76,5 @@ module.exports = {
     })
   }
 }
+
+//initial: 50ms, after: <1ms;
