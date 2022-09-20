@@ -8,7 +8,7 @@ CREATE DATABASE products;
 
 
 CREATE TABLE products (
-    id INT PRIMARY KEY,
+    product_id INT PRIMARY KEY,
     name VARCHAR(50),
     slogan VARCHAR(150),
     description TEXT,
@@ -61,6 +61,7 @@ CREATE INDEX idx_features_pid ON features(product_id);
 CREATE INDEX idx_styles_pid ON styles(product_id);
 CREATE INDEX idx_skus_sid ON skus(style_id);
 CREATE INDEX idx_related_pid ON related_products(current_product_id);
+CREATE INDEX idx_photos_sid ON photos(style_id)
 
 
 /* load */

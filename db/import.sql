@@ -1,6 +1,6 @@
 \c products;
 
-\copy products(id, name, slogan, description, category, default_price) FROM '/root/hackreactor/SystemDesignCapstone/data/product.csv' DELIMITER ',' CSV HEADER;
+\copy products(product_id, name, slogan, description, category, default_price) FROM '/root/hackreactor/SystemDesignCapstone/data/product.csv' DELIMITER ',' CSV HEADER;
 
 \copy features(feature_id, product_id, feature, value) FROM '/root/hackreactor/SystemDesignCapstone/data/features.csv' DELIMITER ',' CSV HEADER;
 

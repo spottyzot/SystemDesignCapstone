@@ -16,7 +16,7 @@ module.exports = {
   },
 
   getInfo: (req, res) => {
-    const {product_id} = req.body;
+    const {product_id} = req.params;
     readInfo(product_id)
     .then((info) => {
       res.send(info);
@@ -28,7 +28,7 @@ module.exports = {
   },
 
   getStyles: (req ,res) => {
-    const {product_id} = req.body;
+    const {product_id} = req.params;
     readStyles(product_id)
     .then((styles) => {
       res.send(styles);
@@ -40,7 +40,7 @@ module.exports = {
   },
 
   getRelated: (req, res) => {
-    const {product_id} = req.body;
+    const {product_id} = req.params;
     console.log(product_id)
     readRelated(product_id)
     .then((related) => {

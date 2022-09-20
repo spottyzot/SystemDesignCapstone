@@ -27,7 +27,8 @@ module.exports = {
   readInfo: (productID) => {
     return pool.connect()
       .then((client) => {
-        const queryStr = "select *, array(select json_build_object('feature', feature, 'value', value) from features where features.product_id = products.id) as features from products where products.id = $1";
+        console.log(productID);
+        const queryStr = "select *, array(select json_build_object('feature', feature, 'value', value) from features where features.product_id = products.product_id) as features from products where products.product_id = $1";
         return client.query(queryStr, [productID])
         .then((info) => {
           client.release();
@@ -46,10 +47,11 @@ module.exports = {
   readStyles: (productID) => {
     return pool.connect()
     .then((client) => {
-      const queryStr = "select products.id, array(select json_build_object('style_id', style_id, 'name', name, 'original_price', original_price, 'sale_price', sale_price, 'default?', default_style, 'photos', array(select json_build_object('thumbnail_url', thumbnail_url, 'url', url) from photos where photos.style_id = styles.style_id), 'skus', (select json_object_agg(skus.sku_id, json_build_object('quantity', quantity, 'size', size)) from skus where skus.style_id = styles.style_id)) from styles where styles.product_id = products.id) as results from products where products.id = $1";
+      const queryStr = "select products.product_id, array(select json_build_object('style_id', style_id, 'name', name, 'original_price', original_price, 'sale_price', sale_price, 'default?', default_style, 'photos', array(select json_build_object('thumbnail_url', thumbnail_url, 'url', url) from photos where photos.style_id = styles.style_id), 'skus', (select json_object_agg(skus.sku_id, json_build_object('quantity', quantity, 'size', size)) from skus where skus.style_id = styles.style_id)) from styles where styles.product_id = products.product_id) as results from products where products.product_id = $1";
       return client.query(queryStr, [productID])
       .then((info) => {
         client.release();
+        console.log(info.rows[0])
         return info.rows[0];
       })
       .catch((err) => {
