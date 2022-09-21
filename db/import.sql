@@ -11,3 +11,4 @@
 \copy skus(sku_id, style_id, size, quantity) FROM '/root/hackreactor/SystemDesignCapstone/data/skus.csv' DELIMITER ',' CSV HEADER;
 
 \copy related_products(related_id, current_product_id, related_product_id) FROM '/root/hackreactor/SystemDesignCapstone/data/related.csv' DELIMITER ',' CSV HEADER;
+
