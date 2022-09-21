@@ -16,12 +16,11 @@ module.exports = {
             })
           .catch((err) => {
             client.release();
-            console.err(err);
+            console.log(err);
           })
       })
   },
 //initial query: 140ms afterwards: <1s querytime
-
 
 
   readInfo: (productID) => {
