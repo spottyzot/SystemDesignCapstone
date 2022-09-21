@@ -19,6 +19,6 @@ app.use('/products', routes);
 
 
 app.listen(process.env.SERVER_PORT, () =>
-  console.log(`app listening at http://localhost:${process.env.SERVER_PORT}`)
+  console.log(`app listening at http://${process.env.PGHOST}:${process.env.SERVER_PORT}`)
 );
 
