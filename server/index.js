@@ -17,7 +17,7 @@ app.use(express.json());
 //set up our initial app connections
 
 
-app.use('/products', routes);
+app.use('', routes);
 
 
 app.listen(process.env.SERVER_PORT, () =>
