@@ -3,6 +3,7 @@ const app = express();
 require('dotenv').config();
 const routes = require('./routes.js');
 const cors=require("cors");
+const morgan = require("morgan");
 
 const corsOptions ={
    origin:'*',
@@ -11,6 +12,7 @@ const corsOptions ={
 }
 
 app.use(cors(corsOptions)) // Use this after the variable declaration
+app.use(morgan('dev'));
 app.use(express.json());
 //set up our initial app connections
 
